@@ -55,6 +55,7 @@ class LoginPage extends React.Component {
     );
   }
   handleInputChange(e) {
+<<<<<<< HEAD
     const { name, value } = e.target;
 
     this.setState(state => ({ [name]: { ...this.state[name], value } }));
@@ -112,6 +113,57 @@ class LoginPage extends React.Component {
           this.props.history.push("/");
         }
       });
+=======
+      const {name, value} = e.target;
+
+      this.setState(state => ({ [name]: { ...this.state[name], value } }));
+  }
+  submitForm(e){
+    e.preventDefault();
+
+    const user = {
+        email: this.state.email.value,
+        password: this.state.password.value
+    }
+
+    const url = 'http://localhost:3000/api/users/login';
+
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }), // body data type must match "Content-Type" header
+    })
+    .then( res => res.json())
+    .then( data => {
+        const { errors, user } = data;
+
+        this.setState({ email: { ...this.state.email, errors: [] }, password: { ...this.state.password, errors: [] }  })
+
+        if (errors) {
+            for (let name in errors) {
+                const errorMessage = errors[name];
+
+                this.setState(state => ({ [name]: { ...state[name], errors: [ ...state[name].errors, errorMessage ] } }));
+            }
+
+            return;
+        }
+
+        if (user) {
+            const { token, ...userData } = user;
+
+            Cookies.create('token', token, null);
+            
+            this.props.dispatch(login(userData));
+            this.props.history.push('/');
+        }
+    });
+>>>>>>> 9dc6f6ced77a81fd53d1b4d6c47bf8f499b579f4
   }
   render() {
     const { classes, ...rest } = this.props;
@@ -189,6 +241,10 @@ class LoginPage extends React.Component {
                             </InputAdornment>
                           )
                         }}
+<<<<<<< HEAD
+=======
+                        
+>>>>>>> 9dc6f6ced77a81fd53d1b4d6c47bf8f499b579f4
                       />
                       <CustomInput
                         labelText="Password"
@@ -231,4 +287,8 @@ class LoginPage extends React.Component {
 
 const LoginPageContainer = connect(dispatch => ({ dispatch }))(LoginPage);
 
+<<<<<<< HEAD
 export default withStyles(loginPageStyle)(LoginPageContainer);
+=======
+export default withStyles(loginPageStyle)(LoginPageContainer);
+>>>>>>> 9dc6f6ced77a81fd53d1b4d6c47bf8f499b579f4

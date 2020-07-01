@@ -47,10 +47,16 @@ class LandingPage extends React.Component {
               <GridItem xs={12} sm={12} md={6}>
                 <h1 className={classes.title}>Full Stack Web App.</h1>
                 <h4>
+<<<<<<< HEAD
                   Designed by Creative-Tim, coded by AppSeed.us.
                   <br />
                   This web app can be generated in React combined with Express /
                   Flask or Laravel. Your choice :)
+=======
+                Designed by Creative-Tim, coded by AppSeed.us.
+                <br/>
+                This web app can be generated in React combined with Express / Flask or Laravel. Your choice :)
+>>>>>>> 9dc6f6ced77a81fd53d1b4d6c47bf8f499b579f4
                 </h4>
                 <br />
                 <Button
